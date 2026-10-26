@@ -1,6 +1,10 @@
-# ascii-sharks-term
+# terminal-sharks
 
 把 [stackedlol/ascii-sharks](https://github.com/stackedlol/ascii-sharks) 的 ASCII 鯊魚搬到終端機上游動。
+
+> 本專案修改自 [stackedlol/ascii-sharks](https://github.com/stackedlol/ascii-sharks)
+> （MIT License，Copyright (c) 2026 drewdi）。原作的模擬與繪製程式沿用並經過修改，
+> 修改內容見下方〈與原作的差異〉。
 
 ```sh
 npm install
@@ -56,4 +60,4 @@ npm start -- classic:white,mako:dark,tiger:natural   # 種類:灰階
 
 ## License
 
-MIT，原作版權見 `LICENSE`。
+MIT。本專案依原作的 MIT 授權發佈，`LICENSE` 保留原作完整的版權與授權聲明。

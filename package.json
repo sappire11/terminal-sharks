@@ -1,5 +1,5 @@
 {
-  "name": "ascii-sharks-term",
+  "name": "terminal-sharks",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
@@ -12,5 +12,10 @@
     "@types/node": "^22.0.0",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0"
+  },
+  "description": "ASCII sharks swimming in your terminal \u2014 a terminal port of stackedlol/ascii-sharks",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tarrragon/terminal-sharks.git"
   }
 }

@@ -256,7 +256,7 @@ function quit() {
 }
 
 if (!out.isTTY) {
-  console.error("ascii-sharks-term needs an interactive terminal.");
+  console.error("terminal-sharks needs an interactive terminal.");
   process.exit(1);
 }
 // Alternate screen, hidden cursor, any-motion mouse tracking in SGR mode.
