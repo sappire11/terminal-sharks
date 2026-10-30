@@ -17,10 +17,29 @@ npm start -- classic:white,mako:dark,tiger:natural   # 種類:灰階
 
 灰階：`white` `light` `mid` `dark` `slate`，或 `natural`（該種類原本的淡色調）。
 沒指定時以四隻為一批自動配色：第一批是由亮到中灰的中性灰，第二批是低明度的藍灰。
-數值定義在 `src/term.ts` 的 `COLORS` 與 `SLATE`。
+數值定義在 `src/lineup.ts` 的 `COLORS` 與 `SLATE`。
 
 操作：滑鼠移動會引誘魚群、點擊會濺起水花；`q` / `Esc` / `Ctrl-C` 離開。
 需要支援 24-bit 色彩的終端機（iTerm2、WezTerm、Kitty、Ghostty 等）。
+
+## 視窗版與 Windows 螢幕保護程式
+
+同一套模擬與繪製，直接畫在瀏覽器 canvas 上（`src/web.ts`），再用 Tauri 包成 `.scr`。
+
+```sh
+npm run dev                  # 瀏覽器開 http://localhost:5173 ；?mode=saver 模擬螢保、?sharks=tiger,mako 指定種類
+npm run tauri dev -- -- /s   # 用 Tauri 視窗跑螢保模式
+npx tauri icon app-icon.svg  # 第一次建置前產生圖示
+npm run scr                  # 產出 release/terminal-sharks.scr
+```
+
+建置需要 Rust（rustup）與 Visual Studio C++ Build Tools；執行需要 WebView2（Windows 11 內建）。
+
+安裝：對 `release/terminal-sharks.scr` 按右鍵選「安裝」，再到「螢幕保護程式設定」選它。
+想隨時叫出來：建一個指向 `terminal-sharks.scr /s` 的捷徑，在捷徑內容設定「快速鍵」。
+
+螢保模式下每個螢幕各一片海；按鍵、點擊或移動滑鼠超過 10px 就結束。
+控制台裡的小預覽框不支援，會保持空白。
 
 ## 運作方式
 
