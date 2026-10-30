@@ -26,20 +26,57 @@ npm start -- classic:white,mako:dark,tiger:natural   # 種類:灰階
 
 同一套模擬與繪製，直接畫在瀏覽器 canvas 上（`src/web.ts`），再用 Tauri 包成 `.scr`。
 
+有兩個場景，在「螢幕保護程式設定」按「設定」切換：
+
+- **鯊魚海洋**：同終端機版。
+- **宇宙：藍咩與航星者**：像素風的夜空（`src/space/`）。藍咩四處漫遊、看流星、打瞌睡；
+  航星者停停飄飄、來拜訪她、列隊飛過、圍觀長角；相遇時會冒愛心，偶爾說「咩!」「嘎!」。
+
+螢保模式下每個螢幕各一片畫面；按鍵、點擊或移動滑鼠超過 10px 就結束。
+控制台裡的小預覽框不支援，會保持空白。
+
+### 建置
+
+需要 Rust（rustup）與 Visual Studio C++ Build Tools（「使用 C++ 的桌面開發」）。
+
 ```sh
-npm run dev                  # 瀏覽器開 http://localhost:5173 ；?mode=saver 模擬螢保、?sharks=tiger,mako 指定種類
-npm run tauri dev -- -- /s   # 用 Tauri 視窗跑螢保模式
-npx tauri icon app-icon.svg  # 第一次建置前產生圖示
-npm run scr                  # 產出 release/terminal-sharks.scr
+npm run dev                              # 瀏覽器開 http://localhost:5173 ；?mode=saver 模擬螢保、?sharks=tiger,mako 指定種類
+                                         # ?scene=space 宇宙場景、&events=fast 事件密集、?mode=sprites 看所有像素圖
+npm run tauri dev -- -- /s               # 用 Tauri 視窗跑螢保模式
+npm run scr                              # 建置 → release/terminal-sharks.scr，並打包 release/terminal-sharks.zip
+node scripts/make-scr.mjs --pack-only    # 不重建，只用現有 .scr 重新打包 zip
 ```
 
-建置需要 Rust（rustup）與 Visual Studio C++ Build Tools；執行需要 WebView2（Windows 11 內建）。
+圖示已產生在 `src-tauri/icons/`；改了 `app-icon.svg` 才需要重跑
+`node node_modules/@tauri-apps/cli/tauri.js icon app-icon.svg`（`npx tauri` 可能卡在安裝確認提示）。
 
-安裝：對 `release/terminal-sharks.scr` 按右鍵選「安裝」，再到「螢幕保護程式設定」選它。
-想隨時叫出來：建一個指向 `terminal-sharks.scr /s` 的捷徑，在捷徑內容設定「快速鍵」。
+分享給別人：傳 `release/terminal-sharks.zip`，內含 `.scr` 與給收檔人看的
+[`安裝說明.txt`](docs/安裝說明.txt)。Email 多半會擋執行檔（zip 也會被掃出來），
+請用雲端硬碟分享連結、LINE 或 USB。
 
-螢保模式下每個螢幕各一片海；按鍵、點擊或移動滑鼠超過 10px 就結束。
-控制台裡的小預覽框不支援，會保持空白。
+### 安裝
+
+需要 Windows 10 / 11（64 位元）與 WebView2 Runtime（Windows 11 內建）。
+
+1. **解除封鎖**（在解壓縮之前）：對下載的 `terminal-sharks.zip` 按右鍵 →「內容」→ 勾選「解除封鎖」→「確定」。
+   沒做的話，閒置啟動時 SmartScreen 的警告顯示不出來，結果是時間到了什麼都沒出現。
+2. 解壓縮，把 `terminal-sharks.scr` 放到固定位置（例如 `C:\Tools\`）。
+   安裝後 Windows 只記住路徑，檔案被搬走或刪掉就會失效；不要留在「下載」或直接從 zip 裡執行。
+3. 對 `terminal-sharks.scr` 按右鍵 →「測試」。若出現「Windows 已保護您的電腦」，按「其他資訊」→「仍要執行」。
+4. 按右鍵 →「安裝」，在「螢幕保護程式設定」設定等候時間 →「確定」。
+
+**快捷鍵（可選）**：在桌面新增捷徑，位置填 `"C:\Tools\terminal-sharks.scr" /s`（`/s` 直接進螢保），
+再到捷徑「內容」→「快速鍵」按一個字母（例如 `S` → `Ctrl + Alt + S`）。
+捷徑必須放在桌面最外層或開始功能表（`Win + R` → `shell:programs`，可建子資料夾）才有效，桌面上的資料夾裡不行。
+
+**解除安裝**：螢幕保護程式設定選「(無)」，再刪除 `.scr` 與捷徑。
+
+**常見問題**
+
+- 時間到了沒出現 → 多半是沒解除封鎖：對 `.scr` 按右鍵 →「內容」→「解除封鎖」，再重新安裝。
+- 白畫面或沒反應 → 安裝 [WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/)（Evergreen Bootstrapper）。
+- 被防毒擋 → 程式沒有數位簽章，部分防毒會誤判；公司電腦請先詢問 IT。
+- 關不掉 → `Ctrl + Alt + Delete` →「工作管理員」→ 結束 terminal-sharks。
 
 ## 運作方式
 

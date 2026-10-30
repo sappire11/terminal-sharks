@@ -23,11 +23,48 @@
         cursor: none;
       }
       .config {
-        padding: 24px;
+        padding: 20px 24px;
         line-height: 1.6;
+      }
+      .config p {
+        margin: 0 0 8px;
+      }
+      .config label {
+        display: block;
+        padding: 2px 0;
+        cursor: pointer;
+      }
+      .config .status {
+        min-height: 1.6em;
+        margin: 8px 0 0;
+        color: #9be7a8;
+      }
+      .config .hint {
+        color: #8a93a6;
+        font-size: 0.9em;
       }
       .config code {
         color: #6ee6ff;
+      }
+      body.sheet {
+        overflow: auto;
+        background: #0a0c1c;
+      }
+      .sprites {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 24px;
+        padding: 24px;
+      }
+      .sprites figure {
+        margin: 0;
+        text-align: center;
+      }
+      .sprites canvas {
+        width: auto;
+        height: auto;
+        image-rendering: pixelated;
       }
     </style>
   </head>

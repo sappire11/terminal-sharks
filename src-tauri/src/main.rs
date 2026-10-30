@@ -66,7 +66,7 @@ fn open_config(app: &AppHandle) -> tauri::Result<()> {
     WebviewWindowBuilder::new(app, "config", WebviewUrl::App("index.html".into()))
         .initialization_script(&mode_script("config"))
         .title("terminal-sharks 設定")
-        .inner_size(480.0, 220.0)
+        .inner_size(480.0, 260.0)
         .resizable(false)
         .center()
         .build()?;
